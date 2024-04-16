@@ -1,0 +1,174 @@
+<section class="panel panel-primary">
+    <div class="panel-heading margin-bottom-10">
+      <strong>{{ '{{ Personale Form }}' }}</strong>
+    </div>
+    <fieldset>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <mat-label>Department</mat-label>
+              <select matNativeControl [(ngModel)]="model.Department" name="Department">
+                <option *ngFor="let department of departments" [value]="department.name">{{ department.name }}</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <mat-label>Sub-Department</mat-label>
+              <select matNativeControl [(ngModel)]="model.SubDepartment" name="SubDepartment">
+                <option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.name">{{ subDepartment.name }}</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+      </fieldset>
+      
+      
+
+   <fieldset> 
+    <form name="EditForm" #EditForm="ngForm">
+      <div class="form-group margin-bottom-0 no-scroll">
+        <div class="row col-md-12">
+          <div class="col-sm-6 col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input type="text" [required]="true" matInput placeholder="Name" [(ngModel)]="model.Name" id="Name" name="Name" maxlength="1000" #Name="ngModel" />
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm-6 col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input type="text" [required]="true" matInput placeholder="Contact Detail" id="Contact_Details" name="Contact_Details" #Contact_Details="ngModel" [(ngModel)]="model.Contact_Details" minlength="11" maxlength="11" matTooltip="without (-)" [minlength]="11" />
+              <mat-error>
+                Please enter 11-digit contact number without (-).
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input [required]="true" matInput placeholder="SurName" id="SurName" name="SurName" [(ngModel)]="model.SurName" maxlength="1000" #SurName="ngModel" />
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input [required]="true" matInput [matDatepicker]="dobPicker" placeholder="DOB" id="DOb" name="DOB" [(ngModel)]="model.DOB" maxlength="1000" #DOB="ngModel" />
+              <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dobPicker></mat-datepicker>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input matInput placeholder="Gender" id="Gender" name="Gender" [(ngModel)]="model.Gender" maxlength="1000" #Gender="ngModel" />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input matInput placeholder="Department" id="Department" name="Department" [(ngModel)]="model.Department" maxlength="1000" #Department="ngModel" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input matInput placeholder="Sub-Department" id="SubDepartment" name="SubDepartment" [(ngModel)]="model.SubDepartment" maxlength="1000" #SubDepartment="ngModel" />
+            </mat-form-field>
+          </div>
+          <!-- <div class="col-md-6">
+            <mat-form-field class="width-100-pr">
+              <input matInput [matDatepicker]="entryDatePicker" placeholder="Entry Date" id="EntryDate" name="EntryDate" [(ngModel)]="model.EntryDate" maxlength="1000" #EntryDate="ngModel" />
+              <mat-datepicker-toggle matSuffix [for]="entryDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #entryDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>           -->
+        </div>
+      </div>
+      <div class="custom-btn-group padding-top-20">
+        <button type="button" class="btn btn-success" (click)="SaveCollectionCenters()">Save</button>
+      </div>
+    </form>
+</fieldset>
+  </section>
+  
+  <fieldset>
+    <legend>Data Grid Section</legend>
+    <section class="panel panel-primary">
+      <div class="panel-heading3">
+        <strong>&nbsp;</strong>
+      </div>
+      <div>
+        <dx-data-grid id="gridContainer" cssClass="CustomExtremeGrid"
+                      [dataSource]="Listing_"
+                      [remoteOperations]="false"
+                      [showBorders]="true"
+                      [allowColumnReordering]="true"
+                      [hoverStateEnabled]="true"
+                      [rowAlternationEnabled]="true"
+                      [allowColumnResizing]="true"
+                      [columnAutoWidth]="true"
+                      (onToolbarPreparing)="onToolbarPreparing($event)">
+          <dxo-scrolling [useNative]="true"
+                         [scrollByContent]="true"
+                         [scrollByThumb]="true"
+                         showScrollbar="onHover">
+          </dxo-scrolling>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"
+                     [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+          <dxo-search-panel [visible]="true"
+                            [highlightCaseSensitive]="true"></dxo-search-panel>
+          <dxo-group-panel [visible]="false"></dxo-group-panel>
+          <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+          <dxo-toolbar [visible]="true">
+            <dxo-item location="before">
+              <dxo-button icon="print" hint="Print" (onClick)="printGrid()"></dxo-button>
+            </dxo-item>
+          </dxo-toolbar>
+          <dxo-export [enabled]="true" fileName="Personnel Form" [allowExportSelectedData]="false"></dxo-export>
+  
+          <dxi-column caption="Sr.#" cellTemplate="rowNumber" [width]="50" [allowFiltering]="false" [allowSorting]="false"></dxi-column>
+          <dxi-column dataField="Name" caption="Name" dataType="string"></dxi-column>
+          <dxi-column dataField="Contact_Details" caption="Contact Details" dataType="string"></dxi-column>
+          <dxi-column dataField="SurName" caption="SurName" dataType="string"></dxi-column>
+          <dxi-column dataField="Gender" caption="Gender" dataType="string"></dxi-column>
+          <dxi-column dataField="Department" caption="Department" dataType="string"></dxi-column>
+          <dxi-column dataField="SubDepartment" caption="SubDepartment" dataType="string"></dxi-column>
+          <div *dxTemplate="let data of 'rowNumber'"></div>
+          <div *dxTemplate="let d of 'model'">
+            <div class="chart-cell">
+              <dx-bullet [showTarget]="false"
+                         [showZeroLevel]="true"
+                         [startScaleValue]="0"
+                         [endScaleValue]="100"
+                         [value]="d.value * 100">
+                <dxo-size [width]="150" [height]="35"></dxo-size>
+                <dxo-tooltip [enabled]="true"
+                             [paddingTopBottom]="2"
+                             [customizeTooltip]="customizeTooltip">
+                  <dxo-font [size]="18"></dxo-font>
+                </dxo-tooltip>
+                <dxo-margin [top]="5" [bottom]="0" [left]="5"></dxo-margin>
+              </dx-bullet>
+            </div>
+          </div>
+          <dxo-export [enabled]="true"></dxo-export>
+          <dxo-paging [pageSize]="25"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+          <div *dxTemplate="let data of 'totalCount'">
+            <div class="informer">
+              <strong class="white"> <strong> Form Listing </strong>&nbsp;<small style="font-size: 0.90rem;">(Total Records: {{totalRecords | number}})</small> </strong>
+            </div>
+          </div>
+        </dx-data-grid>
+      </div>
+    </section>
+  </fieldset>
+  
